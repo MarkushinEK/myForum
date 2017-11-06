@@ -6,6 +6,8 @@ import forum.service.DBServiceimpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @Controller
 public class RegistrationController {
 
@@ -15,10 +17,15 @@ public class RegistrationController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registrationUser(@RequestParam("login") String login, @RequestParam("pass") String pass) {
-        User user = new User(login, pass);
+    public String registrationUser(@RequestParam("login") String login, @RequestParam("pass") String pass, Map<String, Object> model) {
         DBService dbService = DBServiceimpl.instance();
-        dbService.save(user);
+        if (dbService.getUserByLogin(login) == null) {
+            User user = new User(login, pass);
+            dbService.save(user);
+            model.put("login", login);
+            return "profile";
+        }
+        model.put("message", "Логин занят.");
         return "registration";
     }
 }

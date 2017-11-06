@@ -2,6 +2,8 @@ package forum.service;
 
 import forum.config.DataConfig;
 import forum.dao.DAO;
+import forum.dao.UserDAO;
+import forum.dataSet.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -28,6 +30,14 @@ public class DBServiceimpl implements DBService {
         dao.save(data);
         trx.commit();
         session.close();
+    }
+
+    public User getUserByLogin(String login) {
+        Session session = sessionfactory.openSession();
+        UserDAO userDAO = new UserDAO(session);
+        User user = userDAO.getUserByLogin(login);
+        session.close();
+        return user;
     }
 
 }

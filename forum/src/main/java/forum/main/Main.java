@@ -13,6 +13,7 @@ import java.security.ProtectionDomain;
 
 public class Main {
     public static void main(String[] args) throws Exception {
+        DBService dbService = DBServiceimpl.instance();
 
         ProtectionDomain domain = Main.class.getProtectionDomain();
         URL location = domain.getCodeSource().getLocation();
