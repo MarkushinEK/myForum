@@ -22,13 +22,8 @@ public class Main {
         context.setContextPath("/");
         context.setWar(location.toExternalForm());
 
-        ResourceHandler resource_handler = new ResourceHandler();
-        resource_handler.setDirectoriesListed(true);
-        resource_handler.setWelcomeFiles(new String[]{"index.html"});
-        resource_handler.setResourceBase("public_html");
-
         HandlerList handlers = new HandlerList();
-        handlers.setHandlers(new Handler[]{resource_handler, context});
+        handlers.setHandlers(new Handler[]{context});
 
         Server server = new Server(8080);
         server.setHandler(handlers);

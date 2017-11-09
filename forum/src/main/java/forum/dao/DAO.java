@@ -1,6 +1,5 @@
 package forum.dao;
 
-import forum.dataSet.User;
 import org.hibernate.Session;
 
 public class DAO {
