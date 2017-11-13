@@ -40,4 +40,12 @@ public class DBServiceimpl implements DBService {
         return user;
     }
 
+    public Object getObjectById(String className, long id) {
+        Session session = sessionfactory.openSession();
+        UserDAO userDAO = new UserDAO(session);
+        Object object = userDAO.getObjectById(className, id);
+        session.close();
+        return object;
+    }
+
 }

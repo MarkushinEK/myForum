@@ -2,6 +2,8 @@ package forum.dataSet;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "users")
@@ -10,19 +12,25 @@ public class User implements Serializable {
     @Column
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
+    private long id;
 
     @Column(unique = true, updatable = false)
-    public String login;
+    private String login;
 
     @Column
-    public String password;
+    private String password;
+
+    @Column(updatable = false)
+    private String dateOfCreate;
 
     public User() {}
 
     public User(String login, String password) {
         this.login = login;
         this.password = password;
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        dateOfCreate = now.format(formatter);
     }
 
     public String getLogin() {
@@ -35,5 +43,9 @@ public class User implements Serializable {
 
     public long getUserId() {
         return id;
+    }
+
+    public String getDateOfCreate() {
+        return dateOfCreate;
     }
 }

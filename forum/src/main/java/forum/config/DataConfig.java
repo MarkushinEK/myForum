@@ -1,5 +1,6 @@
 package forum.config;
 
+import forum.dataSet.Traed;
 import forum.dataSet.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -19,6 +20,7 @@ public class DataConfig {
     public DataConfig() {
         Configuration config = new Configuration();
         config.addAnnotatedClass(User.class);
+        config.addAnnotatedClass(Traed.class);
         config.setProperty("hibernate.dialect", DIALECT);
         config.setProperty("hibernate.connection.driver_class", DRIVER);
         config.setProperty("hibernate.connection.url", URL);

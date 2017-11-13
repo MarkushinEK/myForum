@@ -14,4 +14,8 @@ public class DAO {
         session.save(data);
     }
 
+    public Object getObjectById(String className, long id) {
+        return session.get(className, id);
+    }
+
 }
