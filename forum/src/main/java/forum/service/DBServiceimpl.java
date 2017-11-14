@@ -2,11 +2,14 @@ package forum.service;
 
 import forum.config.DataConfig;
 import forum.dao.DAO;
+import forum.dao.TreadDAO;
 import forum.dao.UserDAO;
 import forum.dataSet.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+
+import java.util.List;
 
 public class DBServiceimpl implements DBService {
 
@@ -46,6 +49,14 @@ public class DBServiceimpl implements DBService {
         Object object = userDAO.getObjectById(className, id);
         session.close();
         return object;
+    }
+
+    public List getListTreadByTag(String tag) {
+        Session session = sessionfactory.openSession();
+        TreadDAO treadDAO = new TreadDAO(session);
+        List treads = treadDAO.getListTreadByTag(tag);
+        session.close();
+        return treads;
     }
 
 }

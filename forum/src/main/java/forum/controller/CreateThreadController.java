@@ -1,6 +1,6 @@
 package forum.controller;
 
-import forum.dataSet.Traed;
+import forum.dataSet.Tread;
 import forum.dataSet.User;
 import forum.service.DBService;
 import forum.service.DBServiceimpl;
@@ -25,8 +25,8 @@ public class CreateThreadController {
     public String createThread(HttpSession httpSession, @PathVariable("tag") String tag, @RequestParam("subject") String subject, @RequestParam("comment") String comment) {
         DBService dbService = DBServiceimpl.instance();
         User user = dbService.getUserByLogin(httpSession.getAttribute("login").toString());
-        Traed traed = new Traed(subject, comment, user, tag);
-        dbService.save(traed);
+        Tread tread = new Tread(subject, comment, user, tag);
+        dbService.save(tread);
         return "createform";
     }
 }
