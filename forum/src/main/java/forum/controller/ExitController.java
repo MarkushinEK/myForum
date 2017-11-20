@@ -10,6 +10,8 @@ public class ExitController {
     @RequestMapping(value = "/exit", method = RequestMethod.GET)
     public String exit(HttpSession httpSession) {
         httpSession.invalidate();
+
         return "redirect:/";
     }
+
 }

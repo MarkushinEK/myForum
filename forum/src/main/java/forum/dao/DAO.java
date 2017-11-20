@@ -18,4 +18,8 @@ public class DAO {
         return session.get(className, id);
     }
 
+    public void update(String entity, Object object) {
+        session.update(entity, object);
+    }
+
 }

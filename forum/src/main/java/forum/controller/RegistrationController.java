@@ -18,7 +18,11 @@ public class RegistrationController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registrationUser(HttpSession httpSession, @RequestParam("login") String login, @RequestParam("pass") String pass, Map<String, Object> model) {
+    public String registrationUser(HttpSession httpSession,
+                                   @RequestParam("login") String login,
+                                   @RequestParam("pass") String pass,
+                                   Map<String, Object> model) {
+
         DBService dbService = DBServiceimpl.instance();
         if (dbService.getUserByLogin(login) == null) {
             User user = new User(login, pass);
@@ -27,6 +31,8 @@ public class RegistrationController {
             return "redirect:/";
         }
         model.put("message", "Логин занят.");
+
         return "registration";
     }
+
 }

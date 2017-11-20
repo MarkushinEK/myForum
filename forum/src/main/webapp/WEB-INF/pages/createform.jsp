@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8"/>
         <%@ page contentType="text/html;charset=utf-8" %>
-        <title>Registration</title>
+        <title>New</title>
     </head>
     <body>
         <center>

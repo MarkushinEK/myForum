@@ -3,6 +3,10 @@ package forum.dataSet;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "threads")
@@ -17,7 +21,7 @@ public class Tread {
     private String subject;
 
     @Column(updatable = false)
-    private String comment;
+    private String mainComment;
 
     @Column
     private String tag;
@@ -32,33 +36,53 @@ public class Tread {
     @JoinColumn(name = "userId")
     private User user;
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "tread")
+    private List<Comment> comments;
+
     public Tread() {}
 
-    public Tread(String subject, String comment, User user, String tag) {
+    public Tread(String subject, String mainComment, User user, String tag) {
         this.subject = subject;
-        this.comment = comment;
+        this.mainComment = mainComment;
         this.user = user;
         this.tag = tag;
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         dateOfCreate = now.format(formatter);
         dateOfChange = dateOfCreate;
+        comments = new ArrayList<>();
     }
 
+    public void addComment(Comment comment) {
+        comments.add(comment);
+        comment.addTread(this);
+    }
     public String getSubject() {
         return subject;
     }
 
-    public String getComment() {
-        return comment;
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
-    public long getThreadId() {
-        return id;
+    public String getMainComment() {
+        return mainComment;
     }
 
-    public User getUser() {
-        return user;
+    public void setMainComment(String mainComment) {
+        this.mainComment = mainComment;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     public String getDateOfCreate() {
@@ -69,8 +93,23 @@ public class Tread {
         return dateOfChange;
     }
 
-    public String getTag() {
-        return tag;
+    public void setDateOfChange(String dateOfChange) {
+        this.dateOfChange = dateOfChange;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

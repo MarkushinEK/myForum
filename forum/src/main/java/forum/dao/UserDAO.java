@@ -11,6 +11,9 @@ public class UserDAO extends DAO {
     }
 
     public User getUserByLogin(String login) {
-        return (User) session.createCriteria(User.class).add(Restrictions.eq("login", login)).uniqueResult();
+        return (User) session.createCriteria(User.class).
+                add(Restrictions.eq("login", login)).
+                uniqueResult();
     }
+
 }

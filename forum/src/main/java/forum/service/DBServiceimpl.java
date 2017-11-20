@@ -59,4 +59,13 @@ public class DBServiceimpl implements DBService {
         return treads;
     }
 
+    public void update(String entity, Object object) {
+        Session session = sessionfactory.openSession();
+        Transaction trx = session.beginTransaction();
+        DAO DAO = new DAO(session);
+        DAO.update(entity, object);
+        trx.commit();
+        session.close();
+    }
+
 }

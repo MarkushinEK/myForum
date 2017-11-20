@@ -13,4 +13,6 @@ public interface DBService {
     Object getObjectById(String className, long id);
 
     public List getListTreadByTag(String tag);
+
+    public void update(String entity, Object object);
 }

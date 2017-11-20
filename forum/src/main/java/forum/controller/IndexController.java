@@ -13,6 +13,8 @@ public class IndexController {
         model.put("login", httpSession.getAttribute("login"));
         model.put("message", httpSession.getAttribute("message"));
         httpSession.removeAttribute("message");
+
         return "index";
     }
+
 }

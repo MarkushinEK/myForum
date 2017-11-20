@@ -1,9 +1,9 @@
 package forum.dao;
 
 import forum.dataSet.Tread;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
 
 import java.util.List;
 
@@ -14,8 +14,11 @@ public class TreadDAO extends DAO {
     }
 
     public List getListTreadByTag(String tag) {
-        return  session.createCriteria(Tread.class).
+
+        return session.createCriteria(Tread.class).
                 add(Restrictions.eq("tag", tag)).
-                addOrder(Order.asc("dateOfChange")).list();
+                addOrder(Order.desc("dateOfChange")).setFetchMode("comments", FetchMode.SELECT).
+                list();
     }
+
 }
