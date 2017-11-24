@@ -4,7 +4,7 @@ import forum.dataSet.Comment;
 import forum.dataSet.Tread;
 import forum.dataSet.User;
 import forum.service.DBService;
-import forum.service.DBServiceimpl;
+import forum.service.DBServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +19,7 @@ public class ThreadController {
                                   @PathVariable("tag") String tag,
                                   Map<String, Object> model) {
 
-        DBService dbService = DBServiceimpl.instance();
+        DBService dbService = DBServiceImpl.instance();
         List<Tread> treads = (List<Tread>) dbService.getListTreadByTag(tag);
         model.put("tag", tag);
         model.put("treads", treads);
@@ -33,7 +33,7 @@ public class ThreadController {
                            @PathVariable("id") String treadId,
                            Map<String, Object> model) {
 
-        DBService dbService = DBServiceimpl.instance();
+        DBService dbService = DBServiceImpl.instance();
         Tread tread = (Tread) dbService.getObjectById(Tread.class.getName(), Long.parseLong(treadId));
         List<Comment> comments = tread.getComments();
         model.put("comments", tread.getComments());
@@ -49,7 +49,7 @@ public class ThreadController {
                              @RequestParam("message") String message,
                              Map<String, Object> model) {
 
-        DBService dbService = DBServiceimpl.instance();
+        DBService dbService = DBServiceImpl.instance();
         Tread tread = (Tread) dbService.getObjectById(Tread.class.getName(), Long.parseLong(treadId));
         User user = dbService.getUserByLogin((String) httpSession.getAttribute("login"));
         Comment comment = new Comment(message, user);

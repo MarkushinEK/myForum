@@ -9,6 +9,7 @@
     </head>
     <body>
         <div>
+            <img src="http://localhost:8080/image/${tread.user.imageProfileUser.id}.${tread.user.imageProfileUser.extension}"
             <span>
             	${tread.subject}
             </span>
@@ -23,6 +24,7 @@
 
         <c:forEach items="${comments}" var="comments">
             <div>
+                <img src="http://localhost:8080/image/${comments.user.imageProfileUser.id}.${comments.user.imageProfileUser.extension}"/>
             	<span>${comments.user.login}</span>
             	<span>
             		<span>${comments.dateOfCreateMessage}</span>

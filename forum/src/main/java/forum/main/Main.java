@@ -1,7 +1,9 @@
 package forum.main;
 
 import forum.service.DBService;
-import forum.service.DBServiceimpl;
+import forum.service.DBServiceImpl;
+import forum.service.FileHandlerService;
+import forum.service.FileHandlerServiceImpl;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
@@ -12,8 +14,10 @@ import java.security.ProtectionDomain;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        DBService dbService = DBServiceimpl.instance();
+        DBService dbService = DBServiceImpl.instance();
+        FileHandlerService fileHandlerService = FileHandlerServiceImpl.instance();
 
+        //dbService.save(new ImageProfileUser("1.png"));
         ProtectionDomain domain = Main.class.getProtectionDomain();
         URL location = domain.getCodeSource().getLocation();
 

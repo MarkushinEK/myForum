@@ -1,6 +1,7 @@
 package forum.config;
 
 import forum.dataSet.Comment;
+import forum.dataSet.ImageProfileUser;
 import forum.dataSet.Tread;
 import forum.dataSet.User;
 import org.hibernate.SessionFactory;
@@ -23,6 +24,8 @@ public class DataConfig {
         config.addAnnotatedClass(User.class);
         config.addAnnotatedClass(Tread.class);
         config.addAnnotatedClass(Comment.class);
+        config.addAnnotatedClass(ImageProfileUser.class);
+
         config.setProperty("hibernate.dialect", DIALECT);
         config.setProperty("hibernate.connection.driver_class", DRIVER);
         config.setProperty("hibernate.connection.url", URL);

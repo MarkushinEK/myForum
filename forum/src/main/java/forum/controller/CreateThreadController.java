@@ -3,7 +3,7 @@ package forum.controller;
 import forum.dataSet.Tread;
 import forum.dataSet.User;
 import forum.service.DBService;
-import forum.service.DBServiceimpl;
+import forum.service.DBServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +34,7 @@ public class CreateThreadController {
         if (httpSession.getAttribute("login") == null) {
             return "redirect:/{tag}";
         }
-        DBService dbService = DBServiceimpl.instance();
+        DBService dbService = DBServiceImpl.instance();
         User user = dbService.getUserByLogin(httpSession.getAttribute("login").toString());
         Tread tread = new Tread(subject, comment, user, tag);
         dbService.save(tread);

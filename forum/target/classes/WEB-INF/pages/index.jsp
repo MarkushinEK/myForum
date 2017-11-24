@@ -35,6 +35,7 @@
                 Логин: ${login}
                 <input type="submit" value="Выйти">
             </form>
+            <a href="/profile/${login}"><span>Профиль</span></a>
         </center>
         <%
             }

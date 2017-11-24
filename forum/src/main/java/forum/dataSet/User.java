@@ -23,11 +23,16 @@ public class User implements Serializable {
     @Column(updatable = false)
     private String dateOfCreate;
 
+    @ManyToOne
+    @JoinColumn(name = "imageId")
+    private ImageProfileUser imageProfileUser;
+
     public User() {}
 
-    public User(String login, String password) {
+    public User(String login, String password, ImageProfileUser imageProfileUser) {
         this.login = login;
         this.password = password;
+        this.imageProfileUser = imageProfileUser;
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         dateOfCreate = now.format(formatter);
@@ -64,5 +69,13 @@ public class User implements Serializable {
 
     public void setDateOfCreate(String dateOfCreate) {
         this.dateOfCreate = dateOfCreate;
+    }
+
+    public ImageProfileUser getImageProfileUser() {
+        return imageProfileUser;
+    }
+
+    public void setImageProfileUser(ImageProfileUser imageProfileUser) {
+        this.imageProfileUser = imageProfileUser;
     }
 }

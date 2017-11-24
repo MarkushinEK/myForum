@@ -1,8 +1,9 @@
 package forum.controller;
 
+import forum.dataSet.ImageProfileUser;
 import forum.dataSet.User;
 import forum.service.DBService;
-import forum.service.DBServiceimpl;
+import forum.service.DBServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,9 +24,10 @@ public class RegistrationController {
                                    @RequestParam("pass") String pass,
                                    Map<String, Object> model) {
 
-        DBService dbService = DBServiceimpl.instance();
+        DBService dbService = DBServiceImpl.instance();
         if (dbService.getUserByLogin(login) == null) {
-            User user = new User(login, pass);
+            ImageProfileUser imageProfileUser = (ImageProfileUser) dbService.getObjectById(ImageProfileUser.class.getName(), 1);
+            User user = new User(login, pass, imageProfileUser);
             dbService.save(user);
             httpSession.setAttribute("login", login );
             return "redirect:/";

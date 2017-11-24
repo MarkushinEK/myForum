@@ -11,19 +11,19 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class DBServiceimpl implements DBService {
+public class DBServiceImpl implements DBService {
 
     private static DBService dbService;
     private SessionFactory sessionfactory;
 
-    private DBServiceimpl() {
+    private DBServiceImpl() {
         sessionfactory = new DataConfig().getSessionFactory();
     }
 
-    public static DBServiceimpl instance() {
+    public static DBServiceImpl instance() {
         if (dbService == null)
-            dbService = new DBServiceimpl();
-        return (DBServiceimpl) dbService;
+            dbService = new DBServiceImpl();
+        return (DBServiceImpl) dbService;
     }
 
     public void save(Object data) {

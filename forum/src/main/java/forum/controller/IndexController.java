@@ -9,7 +9,9 @@ import java.util.Map;
 @Controller
 public class IndexController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String init(HttpSession httpSession, Map<String, Object> model) {
+    public String init(HttpSession httpSession,
+                       Map<String, Object> model) {
+
         model.put("login", httpSession.getAttribute("login"));
         model.put("message", httpSession.getAttribute("message"));
         httpSession.removeAttribute("message");
