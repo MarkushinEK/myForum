@@ -10,6 +10,8 @@ public interface DBService {
 
     User getUserByLogin(String login);
 
+    public User getUserByEmail(String email);
+
     Object getObjectById(String className, long id);
 
     public List getListTreadByTag(String tag);

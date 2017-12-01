@@ -1,5 +1,7 @@
 package forum.dataSet;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -14,6 +16,7 @@ public class Comment {
     private long id;
 
     @Column(updatable = false)
+    @Type(type = "text")
     private String message;
 
     @ManyToOne

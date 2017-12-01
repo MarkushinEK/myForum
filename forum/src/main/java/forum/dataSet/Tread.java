@@ -1,5 +1,7 @@
 package forum.dataSet;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -19,6 +21,7 @@ public class Tread {
     private String subject;
 
     @Column(updatable = false)
+    @Type(type = "text")
     private String mainComment;
 
     @Column

@@ -40,10 +40,22 @@ public class ImageController {
                            Map<String, Object> model) {
         DBService dbService = DBServiceImpl.instance();
 
+        User user = dbService.getUserByLogin((String) httpSession.getAttribute("login"));
+        String extension = data.getOriginalFilename().substring(data.getOriginalFilename().lastIndexOf(".")+1);
+
+        if(!(extension.equals("png") || extension.equals("jpg") || extension.equals("jpeg") || extension.equals("bmp"))) {
+            httpSession.setAttribute("errorMessage", "Недопустимый формат данных");
+            return "redirect:/profile/" + user.getLogin();
+        }
+
+        if (data.getSize()>2000000) {
+            httpSession.setAttribute("errorMessage", "Файл превышает допустимый размер");
+            return "redirect:/profile/" + user.getLogin();
+        }
+
         String fileName = data.getOriginalFilename();
         ImageProfileUser imageProfileUser = new ImageProfileUser(data.getOriginalFilename());
         dbService.save(imageProfileUser);
-        User user = dbService.getUserByLogin((String) httpSession.getAttribute("login"));
         user.setImageProfileUser(imageProfileUser);
         dbService.update(User.class.getName(), user);
 

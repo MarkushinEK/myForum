@@ -23,19 +23,24 @@ public class User implements Serializable {
     @Column(updatable = false)
     private String dateOfCreate;
 
+    @Column(unique = true)
+    private String email;
+
     @ManyToOne
     @JoinColumn(name = "imageId")
     private ImageProfileUser imageProfileUser;
 
     public User() {}
 
-    public User(String login, String password, ImageProfileUser imageProfileUser) {
+    public User(String login, String password, String email, ImageProfileUser imageProfileUser) {
         this.login = login;
         this.password = password;
+        this.email = email;
         this.imageProfileUser = imageProfileUser;
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         dateOfCreate = now.format(formatter);
+
     }
 
 
@@ -77,5 +82,13 @@ public class User implements Serializable {
 
     public void setImageProfileUser(ImageProfileUser imageProfileUser) {
         this.imageProfileUser = imageProfileUser;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

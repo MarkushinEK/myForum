@@ -1,9 +1,6 @@
 package forum.config;
 
-import forum.dataSet.Comment;
-import forum.dataSet.ImageProfileUser;
-import forum.dataSet.Tread;
-import forum.dataSet.User;
+import forum.dataSet.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;

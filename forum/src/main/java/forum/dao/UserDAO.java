@@ -16,4 +16,10 @@ public class UserDAO extends DAO {
                 uniqueResult();
     }
 
+    public User getUserByEmail(String email) {
+        return (User) session.createCriteria(User.class).
+                add(Restrictions.eq("email", email)).
+                uniqueResult();
+    }
+
 }

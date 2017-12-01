@@ -8,6 +8,9 @@
         <title>${tag}</title>
     </head>
     <body>
+        <center>
+            <h1>${tag_transcript}</h1>
+        </center>
         <%
             if (request.getSession().getAttribute("login") == null) {
         %>
@@ -20,20 +23,28 @@
             }
         %>
         <c:forEach items="${treads}" var="treads">
+            <hr>
             <div>
                 <span>
-                	${treads.subject}
+                	<H3>${treads.subject}</H3>
                 </span>
-            	<span>${treads.user.login}</span>
-            	<span>
-            		<span>${treads.dateOfCreate}</span>
-            	</span>
-            	<span> [<a href="/${tag}/${treads.id}">Ответ</a>]</span>
             </div>
-            <blockquote>
-            		${treads.mainComment}
+            <div>
+                <span>
+                    <a href="/profile/${treads.user.login}"><span>${treads.user.login}</span></a>
+                </span>
+                <span>
+                	<span>${treads.dateOfCreate}</span>
+                </span>
+                <span> [<a href="/${tag}/${treads.id}">Ответ</a>]</span>
+            </div>
+            <img src="http://localhost:8080/image/${treads.user.imageProfileUser.id}.${treads.user.imageProfileUser.extension}" width="100" height="125" align="left" vspace="5" hspace="5"/>
+            <blockquote style="overflow: auto;">
+                ${treads.mainComment}
             </blockquote>
+            <div style="clear: left"></div>
+            <br>
         </c:forEach>
-
+        <hr>
     </body>
 </html>

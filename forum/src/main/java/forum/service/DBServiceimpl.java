@@ -26,6 +26,7 @@ public class DBServiceImpl implements DBService {
         return (DBServiceImpl) dbService;
     }
 
+    @Override
     public void save(Object data) {
         Session session = sessionfactory.openSession();
         Transaction trx = session.beginTransaction();
@@ -35,6 +36,7 @@ public class DBServiceImpl implements DBService {
         session.close();
     }
 
+    @Override
     public User getUserByLogin(String login) {
         Session session = sessionfactory.openSession();
         UserDAO userDAO = new UserDAO(session);
@@ -43,6 +45,16 @@ public class DBServiceImpl implements DBService {
         return user;
     }
 
+    @Override
+    public User getUserByEmail(String email) {
+        Session session = sessionfactory.openSession();
+        UserDAO userDAO = new UserDAO(session);
+        User user = userDAO.getUserByEmail(email);
+        session.close();
+        return user;
+    }
+
+    @Override
     public Object getObjectById(String className, long id) {
         Session session = sessionfactory.openSession();
         UserDAO userDAO = new UserDAO(session);
@@ -51,6 +63,7 @@ public class DBServiceImpl implements DBService {
         return object;
     }
 
+    @Override
     public List getListTreadByTag(String tag) {
         Session session = sessionfactory.openSession();
         TreadDAO treadDAO = new TreadDAO(session);
@@ -59,6 +72,7 @@ public class DBServiceImpl implements DBService {
         return treads;
     }
 
+    @Override
     public void update(String entity, Object object) {
         Session session = sessionfactory.openSession();
         Transaction trx = session.beginTransaction();

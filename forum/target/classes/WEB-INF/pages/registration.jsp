@@ -9,6 +9,7 @@
         <form action="/registration" method="POST">
             Логин: <input type="text" name="login"/>
             Пароль: <input type="password" name="pass"/>
+            Почта: <input type="text" name="email"/>
             <input type="submit" value="Регистрация">
         </form>
         <p>${message}</p>

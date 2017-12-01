@@ -23,6 +23,7 @@ public class FileHandlerServiceImpl implements FileHandlerService {
         return (FileHandlerServiceImpl) fileHandlerService;
     }
 
+    @Override
     public BufferedImage getBufferedImage(String imageName, String extension) {
         BufferedImage bufImg = null;
         try {
@@ -32,17 +33,14 @@ public class FileHandlerServiceImpl implements FileHandlerService {
                     .append(extension);
 
             Image image = ImageIO.read(new File(path.toString()));
-            bufImg = new BufferedImage(100 , 125,
-                    BufferedImage.TYPE_INT_RGB);
-            Graphics2D g = bufImg.createGraphics();
-            g.drawImage(image, 0, 0, 100, 125, null);
-            g.dispose();
+            bufImg = ImageIO.read(new File(path.toString()));
         } catch (IOException e) {
             e.printStackTrace();
         }
         return bufImg;
     }
 
+    @Override
     public void saveImage(long imageId, String extension, MultipartFile data) {
         StringBuilder stringBuilder = new StringBuilder(IMAGE_ROOT)
                 .append(imageId)

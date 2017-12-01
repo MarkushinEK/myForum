@@ -1,9 +1,7 @@
 package forum.main;
 
-import forum.service.DBService;
-import forum.service.DBServiceImpl;
-import forum.service.FileHandlerService;
-import forum.service.FileHandlerServiceImpl;
+import forum.dataSet.ImageProfileUser;
+import forum.service.*;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
@@ -16,6 +14,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         DBService dbService = DBServiceImpl.instance();
         FileHandlerService fileHandlerService = FileHandlerServiceImpl.instance();
+        ForumService forumService = ForumServiceImpl.instance();
 
         //dbService.save(new ImageProfileUser("1.png"));
         ProtectionDomain domain = Main.class.getProtectionDomain();
