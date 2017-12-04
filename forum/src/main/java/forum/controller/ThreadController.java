@@ -98,6 +98,7 @@ public class ThreadController {
         tread.addComment(comment);
         tread.setDateOfChange(comment.getDateOfCreateMessage());
         dbService.save(comment);
+        dbService.update("users", user);
         dbService.update("threads", tread);
         model.put("tread", tread);
 

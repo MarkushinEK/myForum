@@ -65,6 +65,7 @@ public class CreateThreadController {
         User user = dbService.getUserByLogin(httpSession.getAttribute("login").toString());
         Tread tread = new Tread(subject, comment, user, tag);
         dbService.save(tread);
+        dbService.update("users", user);
 
         return "redirect:/{tag}";
     }

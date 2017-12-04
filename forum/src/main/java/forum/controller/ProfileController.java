@@ -23,7 +23,6 @@ public class ProfileController {
 
         DBService dbService = DBServiceImpl.instance();
         User user = dbService.getUserByLogin(login);
-
         if (user != null) {
             model.put("login", login);
             model.put("email", user.getEmail());
@@ -66,6 +65,52 @@ public class ProfileController {
 
         model.put("errorMessage", "Нет доступа к данным");
         return "errorpage";
+    }
+
+    @RequestMapping(value = "/profile/{login}/find/messages", method = RequestMethod.GET)
+    public String findMessages(HttpSession httpSession,
+                               HttpServletResponse response,
+                               @PathVariable("login") String login,
+                               Map<String, Object> model) {
+
+        DBService dbService = DBServiceImpl.instance();
+        User user = dbService.getUserByLogin(login);
+
+        if (user == null) {
+            model.put("errorMessage", "404 Страница не найдена");
+            return "errorpage";
+        }
+
+        if(user.getComments().isEmpty()) {
+            model.put("errorMessage", "У пользователя нет созданных сообщений.");
+            return "errorpage";
+        }
+
+        model.put("comments", user.getComments());
+        return "find_comments";
+    }
+
+    @RequestMapping(value = "/profile/{login}/find/threads", method = RequestMethod.GET)
+    public String findThreads(HttpSession httpSession,
+                               HttpServletResponse response,
+                               @PathVariable("login") String login,
+                               Map<String, Object> model) {
+
+        DBService dbService = DBServiceImpl.instance();
+        User user = dbService.getUserByLogin(login);
+
+        if (user == null) {
+            model.put("errorMessage", "404 Страница не найдена");
+            return "errorpage";
+        }
+
+        if(user.getThreads().isEmpty()) {
+            model.put("errorMessage", "У пользователя нет созданных тем.");
+            return "errorpage";
+        }
+
+        model.put("treads", user.getThreads());
+        return "find_threads";
     }
 
 }

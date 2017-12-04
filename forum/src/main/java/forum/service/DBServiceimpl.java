@@ -5,6 +5,7 @@ import forum.dao.DAO;
 import forum.dao.TreadDAO;
 import forum.dao.UserDAO;
 import forum.dataSet.User;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -41,6 +42,10 @@ public class DBServiceImpl implements DBService {
         Session session = sessionfactory.openSession();
         UserDAO userDAO = new UserDAO(session);
         User user = userDAO.getUserByLogin(login);
+        if (user != null) {
+            Hibernate.initialize(user.getThreads());
+            Hibernate.initialize(user.getComments());
+        }
         session.close();
         return user;
     }
@@ -50,6 +55,10 @@ public class DBServiceImpl implements DBService {
         Session session = sessionfactory.openSession();
         UserDAO userDAO = new UserDAO(session);
         User user = userDAO.getUserByEmail(email);
+        if (user != null) {
+            Hibernate.initialize(user.getThreads());
+            Hibernate.initialize(user.getComments());
+        }
         session.close();
         return user;
     }

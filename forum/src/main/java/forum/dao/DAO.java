@@ -2,6 +2,8 @@ package forum.dao;
 
 import org.hibernate.Session;
 
+import javax.transaction.Transactional;
+
 public class DAO {
 
     Session session;

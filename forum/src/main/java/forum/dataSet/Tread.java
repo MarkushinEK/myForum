@@ -52,12 +52,14 @@ public class Tread {
         dateOfCreate = now.format(formatter);
         dateOfChange = dateOfCreate;
         comments = new ArrayList<>();
+        user.addThread(this);
     }
 
     public void addComment(Comment comment) {
         comments.add(comment);
         comment.addTread(this);
     }
+
     public String getSubject() {
         return subject;
     }

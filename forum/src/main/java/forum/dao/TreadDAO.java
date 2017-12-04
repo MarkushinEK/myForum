@@ -5,6 +5,7 @@ import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 public class TreadDAO extends DAO {

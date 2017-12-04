@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -30,6 +32,12 @@ public class User implements Serializable {
     @JoinColumn(name = "imageId")
     private ImageProfileUser imageProfileUser;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Tread> threads;
+
     public User() {}
 
     public User(String login, String password, String email, ImageProfileUser imageProfileUser) {
@@ -40,9 +48,17 @@ public class User implements Serializable {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         dateOfCreate = now.format(formatter);
-
+        comments = new ArrayList<>();
+        threads = new ArrayList<>();
     }
 
+    public void addComment(Comment comment) {
+        comments.add(comment);
+    }
+
+    public void addThread(Tread tread) {
+        threads.add(tread);
+    }
 
     public long getId() {
         return id;
@@ -90,5 +106,13 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public List<Tread> getThreads() {
+        return threads;
     }
 }
