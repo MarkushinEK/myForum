@@ -91,4 +91,23 @@ public class DBServiceImpl implements DBService {
         session.close();
     }
 
+    @Override
+    public void delete(Object object) {
+        Session session = sessionfactory.openSession();
+        Transaction trx = session.beginTransaction();
+        DAO DAO = new DAO(session);
+        DAO.delete(object);
+        trx.commit();
+        session.close();
+    }
+
+    @Override
+    public List getListTread() {
+        Session session = sessionfactory.openSession();
+        TreadDAO treadDAO = new TreadDAO(session);
+        List treads = treadDAO.getListTread();
+        session.close();
+        return treads;
+    }
+
 }

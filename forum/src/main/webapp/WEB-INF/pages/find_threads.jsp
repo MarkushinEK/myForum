@@ -6,21 +6,32 @@
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
         <title>Threads</title>
+        <style>
+           <%@include file='css/bootstrap.css' %>
+           <%@include file='css/mystyle.css' %>
+        </style>
     </head>
     <body>
-        <c:forEach items="${treads}" var="treads">
-            <div>
-                <span>
-                    <a href="/${treads.tag}/${treads.id}"><span>${treads.subject}</span></a>
-                </span>
-                <span>
-                	<span>${treads.dateOfCreate}</span>
-                </span>
+        <div class="container-fluid">
+            <div class="row">
+                <a href="/"><span>&nbsp;Главная</span></a>
             </div>
-            <blockquote style="overflow: auto;">
-                ${treads.mainComment}
-            </blockquote>
-            <br>
+        </div>
+        <br>
+        <c:forEach items="${treads}" var="treads">
+            <div class="userthreads">
+                <div>
+                    <span>
+                        <a href="/${treads.tag}/${treads.id}"><span>&nbsp;${treads.subject}</span></a>
+                    </span>
+                    <span>
+                    	<span>${treads.dateOfCreate}</span>
+                    </span>
+                </div>
+                <blockquote style="overflow: auto;">
+                    ${treads.mainComment}
+                </blockquote>
+            </div>
             <hr>
         </c:forEach>
     </body>

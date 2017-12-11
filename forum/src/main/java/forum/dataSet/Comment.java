@@ -38,6 +38,7 @@ public class Comment {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         dateOfCreateMessage = now.format(formatter);
+        user.addComment(this);
     }
 
     public void addTread(Tread tread) {

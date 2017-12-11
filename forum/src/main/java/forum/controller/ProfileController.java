@@ -26,6 +26,7 @@ public class ProfileController {
         if (user != null) {
             model.put("login", login);
             model.put("email", user.getEmail());
+            model.put("dateofcreate", user.getDateOfCreate());
             model.put("imageName", user.getImageProfileUser().getId() + "." + user.getImageProfileUser().getExtension());
             if (httpSession.getAttribute("login") != null)
                 if (dbService.getUserByLogin((String )httpSession.getAttribute("login")).getLogin().equals(login)) {

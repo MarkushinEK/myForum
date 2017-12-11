@@ -1,6 +1,5 @@
 package forum.main;
 
-import forum.dataSet.ImageProfileUser;
 import forum.service.*;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
@@ -15,6 +14,8 @@ public class Main {
         DBService dbService = DBServiceImpl.instance();
         FileHandlerService fileHandlerService = FileHandlerServiceImpl.instance();
         ForumService forumService = ForumServiceImpl.instance();
+
+        forumService.setNumOfThreads(dbService.getListTread());
 
         //dbService.save(new ImageProfileUser("1.png"));
         ProtectionDomain domain = Main.class.getProtectionDomain();

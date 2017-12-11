@@ -19,15 +19,15 @@ import java.util.Map;
 @Controller
 public class ThreadController {
 
-    @Value("#{${tags}}")
-    private Map<String,String> tags;
+    @Value("#{${tagTranslate}}")
+    private Map<String,String> tagTranslate;
 
     @RequestMapping(value = "/{tag}", method = RequestMethod.GET)
     public String getListOfTreads(HttpSession httpSession,
                                   @PathVariable("tag") String tag,
                                   Map<String, Object> model) {
 
-        if (!tags.containsKey(tag)) {
+        if (!tagTranslate.containsKey(tag)) {
             model.put("errorMessage", "404 Страница не найдена");
             return "errorpage";
         }
@@ -38,7 +38,7 @@ public class ThreadController {
         model.put("treads", treads);
 
         try {
-            model.put("tag_transcript", new String(tags.get(tag).getBytes("ISO-8859-1"), "WINDOWS-1251"));
+            model.put("tag_transcript", new String(tagTranslate.get(tag).getBytes("ISO-8859-1"), "WINDOWS-1251"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

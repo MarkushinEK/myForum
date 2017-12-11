@@ -1,11 +1,8 @@
 package forum.dao;
 
 import forum.dataSet.User;
-import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-
-import javax.transaction.Transactional;
 
 public class UserDAO extends DAO {
 

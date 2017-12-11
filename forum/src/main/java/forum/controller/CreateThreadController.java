@@ -61,7 +61,15 @@ public class CreateThreadController {
                     "Поле темы не должно быть пустым.");
         }
 
+
         DBService dbService = DBServiceImpl.instance();
+        if(forumService.checkLimitThreads(tag)) {
+            forumService.increaseNumOfThread(tag);
+        }
+        else {
+            dbService.delete(dbService.getListTreadByTag(tag).get(forumService.getMaxNumberOfThreads()));
+        }
+
         User user = dbService.getUserByLogin(httpSession.getAttribute("login").toString());
         Tread tread = new Tread(subject, comment, user, tag);
         dbService.save(tread);

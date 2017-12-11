@@ -17,4 +17,8 @@ public interface DBService {
     public List getListTreadByTag(String tag);
 
     public void update(String entity, Object object);
+
+    public void delete(Object object);
+
+    public List getListTread();
 }

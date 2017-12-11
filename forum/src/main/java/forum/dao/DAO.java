@@ -2,8 +2,6 @@ package forum.dao;
 
 import org.hibernate.Session;
 
-import javax.transaction.Transactional;
-
 public class DAO {
 
     Session session;
@@ -22,6 +20,10 @@ public class DAO {
 
     public void update(String entity, Object object) {
         session.update(entity, object);
+    }
+
+    public void delete(Object object) {
+        session.delete(object);
     }
 
 }

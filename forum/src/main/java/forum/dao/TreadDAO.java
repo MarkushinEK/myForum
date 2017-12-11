@@ -5,7 +5,6 @@ import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.*;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 public class TreadDAO extends DAO {
@@ -19,6 +18,12 @@ public class TreadDAO extends DAO {
         return session.createCriteria(Tread.class).
                 add(Restrictions.eq("tag", tag)).
                 addOrder(Order.desc("dateOfChange")).setFetchMode("comments", FetchMode.SELECT).
+                list();
+    }
+
+
+    public List getListTread() {
+        return session.createCriteria(Tread.class).
                 list();
     }
 

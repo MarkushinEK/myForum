@@ -5,8 +5,18 @@
         <%@ page contentType="text/html;charset=utf-8" %>
         <script src='https://www.google.com/recaptcha/api.js'></script>
         <title>New</title>
+        <style>
+           <%@include file='css/bootstrap.css' %>
+           <%@include file='css/mystyle.css' %>
+        </style>
     </head>
     <body>
+        <div class="container-fluid">
+            <div class="row">
+                <a href="/"><span>&nbsp;Главная</span></a>
+            </div>
+        </div>
+        <br>
         <center>
             <form id="postform" class="postform tmp_postform" action="/${tag}/create" method="POST">
                 <table>

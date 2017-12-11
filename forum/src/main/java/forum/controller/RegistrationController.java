@@ -34,7 +34,7 @@ public class RegistrationController {
             return "registration";
         }
 
-        if (!forumService.loginValidator(pass)) {
+        if (!forumService.passValidator(pass)) {
             model.put("message", "Пароль должен быть более пяти и меньше двадцати символов без пробелов.");
             return "registration";
         }

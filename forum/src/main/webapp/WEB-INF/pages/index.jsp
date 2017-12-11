@@ -4,11 +4,15 @@
         <meta charset="UTF-8"/>
         <%@ page contentType="text/html;charset=utf-8" %>
         <title>Forum</title>
+        <style>
+           <%@include file='css/bootstrap.css' %>
+           <%@include file='css/mystyle.css' %>
+        </style>
     </head>
     <body>
         <header class="header">
             <center>
-                <h1>Гра.ч</h1>
+                <div><h1>Гра.ч</h1></div>
                 <p>Добро пожаловать. Опять.</p>
             </center>
         </header>
@@ -40,11 +44,13 @@
         <%
             }
         %>
-        <h2> Тематика: </h2>
-        <a href="/au"><span>Автомобили</span></a>
-        <a href="/bi"><span>Велосипеды</span></a>
-        <a href="/biz"><span>Бизнес</span></a>
-        <a href="/dg"><span>Другие страны</span></a>
-        <a href="/hi"><span>История</span></a>
+        <div class="table">
+            <h2>&nbsp;Тематика: </h2>
+            <div><a href="/au"><span>&nbsp;Автомобили</span></a></div>
+            <div><a href="/bi"><span>&nbsp;Велосипеды</span></a></div>
+            <div><a href="/biz"><span>&nbsp;Бизнес</span></a></div>
+            <div><a href="/dg"><span>&nbsp;Другие страны</span></a></div>
+            <div><a href="/hi"><span>&nbsp;История</span></a></div>
+        <div>
     </body>
 </html>

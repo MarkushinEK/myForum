@@ -1,8 +1,12 @@
 package forum.service;
 
+import forum.dataSet.Tread;
 import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -13,6 +17,10 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class ForumServiceImpl implements ForumService {
+
+    private Map<String,Integer> numOfThreads = new ConcurrentHashMap<>();
+
+    private final static int MAX_NUMBER_OF_THREADS = 20;
 
     private static ForumService forumService;
 
@@ -80,6 +88,33 @@ public class ForumServiceImpl implements ForumService {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
+    }
+
+
+    @Override
+    public boolean checkLimitThreads(String tag) {
+        System.out.println(numOfThreads);
+        return numOfThreads.getOrDefault(tag, 0) < MAX_NUMBER_OF_THREADS;
+    }
+
+    @Override
+    public Map<String, Integer> getNumOfThreads() {
+        return numOfThreads;
+    }
+
+    @Override
+    public void setNumOfThreads(List<Tread> treads) {
+        for(Tread tread:treads)
+            numOfThreads.put(tread.getTag(), numOfThreads.getOrDefault(tread.getTag(), 0)+1);
+    }
+
+    @Override
+    public void increaseNumOfThread(String tag) {
+        numOfThreads.put(tag, numOfThreads.getOrDefault(tag, 0)+1);
+    }
+
+    public int getMaxNumberOfThreads() {
+        return MAX_NUMBER_OF_THREADS;
     }
 
 }

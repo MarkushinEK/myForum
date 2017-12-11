@@ -4,46 +4,58 @@
         <meta charset="UTF-8"/>
         <%@ page contentType="text/html;charset=utf-8" %>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+        <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
         <script src='https://www.google.com/recaptcha/api.js'></script>
         <title>${tread.id}</title>
+        <style>
+           <%@include file='css/bootstrap.css' %>
+           <%@include file='css/mystyle.css' %>
+        </style>
     </head>
     <body>
+        <div class="container-fluid">
+            <div class="row">
+                <a href="/"><span>&nbsp;Главная</span></a>
+            </div>
+        </div>
+        <br>
         <div>
             <span>
             	<H3>Тема: ${tread.subject}</H3>
             </span>
         </div>
-        <div>
-            <span>
-                <a href="/profile/${tread.user.login}"><span>${tread.user.login}</span></a>
-            </span>
-            <span>
-            	<span>${tread.dateOfCreate}</span>
-            </span>
-        </div>
-        <img src="http://localhost:8080/image/${tread.user.imageProfileUser.id}.${tread.user.imageProfileUser.extension}" width="100" height="125" align="left" vspace="5" hspace="5"/>
-        <blockquote style="overflow: auto;">
-            <H2>${tread.mainComment}</H2>
-        </blockquote>
-        <div style="clear: left"></div>
-        <br>
-
-        <c:forEach items="${comments}" var="comments">
-            <hr>
+        <div class="maincomment">
             <div>
                 <span>
-                    <a href="/profile/${comments.user.login}"><span>${comments.user.login}</span></a>
+                    <a href="/profile/${tread.user.login}"><span>&nbsp;${tread.user.login}</span></a>
                 </span>
                 <span>
-                    <span>${comments.dateOfCreateMessage}</span>
+                	<span>${tread.dateOfCreate}</span>
                 </span>
             </div>
-            <img src="http://localhost:8080/image/${comments.user.imageProfileUser.id}.${comments.user.imageProfileUser.extension}" width="100" height="125" align="left" vspace="5" hspace="5"/>
-            <blockquote style="overflow: auto;">
-            		${comments.message}
+            <img src="http://localhost:8080/image/${tread.user.imageProfileUser.id}.${tread.user.imageProfileUser.extension}" width="100" height="125" align="left" vspace="5" hspace="5"/>
+            <blockquote class="mainmessage">
+                <H2>${tread.mainComment}</H2>
             </blockquote>
             <div style="clear: left"></div>
-            <br>
+        </div>
+        <c:forEach items="${comments}" var="comments">
+            <hr>
+            <div class="blockmessage">
+                <div>
+                    <span>
+                        <a href="/profile/${comments.user.login}"><span>&nbsp;${comments.user.login}</span></a>
+                    </span>
+                    <span>
+                        <span>${comments.dateOfCreateMessage}</span>
+                    </span>
+                </div>
+                <img src="http://localhost:8080/image/${comments.user.imageProfileUser.id}.${comments.user.imageProfileUser.extension}" width="100" height="125" align="left" vspace="5" hspace="5"/>
+                <blockquote class="message">
+                		${comments.message}
+                </blockquote>
+                <div style="clear: left"></div>
+            </div>
         </c:forEach>
         <hr>
 
