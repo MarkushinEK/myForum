@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +35,7 @@ public class ThreadController {
 
         DBService dbService = DBServiceImpl.instance();
         List<Tread> treads = (List<Tread>) dbService.getListTreadByTag(tag);
+
         model.put("tag", tag);
         model.put("treads", treads);
 
@@ -55,9 +57,10 @@ public class ThreadController {
         DBService dbService = DBServiceImpl.instance();
         Tread tread = (Tread) dbService.getObjectById(Tread.class.getName(), Long.parseLong(treadId));
         List<Comment> comments = tread.getComments();
+        comments.sort((o1, o2)->o1.getDateOfCreateMessage().compareTo(o2.getDateOfCreateMessage()));
         model.put("errorMessage", httpSession.getAttribute("errorMessage"));
         httpSession.removeAttribute("errorMessage");
-        model.put("comments", tread.getComments());
+        model.put("comments", comments);
         model.put("tread", tread);
 
         return "tread";

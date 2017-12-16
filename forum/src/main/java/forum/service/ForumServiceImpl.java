@@ -1,8 +1,10 @@
 package forum.service;
 
+import forum.dataSet.Comment;
 import forum.dataSet.Tread;
 import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -93,7 +95,6 @@ public class ForumServiceImpl implements ForumService {
 
     @Override
     public boolean checkLimitThreads(String tag) {
-        System.out.println(numOfThreads);
         return numOfThreads.getOrDefault(tag, 0) < MAX_NUMBER_OF_THREADS;
     }
 

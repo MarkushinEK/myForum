@@ -1,5 +1,6 @@
 package forum.main;
 
+import forum.dataSet.ImageProfileUser;
 import forum.service.*;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
